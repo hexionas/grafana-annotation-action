@@ -1,6 +1,8 @@
 # grafana-annotation-action
 GitHub Action for Grafana annotations.
 
+![Example Image](images/example.png)
+
 ## Creating an annotation and updating the end time after some actions
 
 ```yaml

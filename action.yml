@@ -1,4 +1,4 @@
-name: "Add Grafana annotation and optionally update end time upon action completion."
+name: "grafana-annotation-actions"
 author: "Daniel O'Neill"
 description: "Create Grafana annotations using Github Actions. Update the annotation end time after an Action is finished."
 
