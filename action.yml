@@ -107,3 +107,7 @@ runs:
         else
           update_annotation_end_time
         fi
+
+branding:
+  icon: 'anchor'
+  color: 'white'
