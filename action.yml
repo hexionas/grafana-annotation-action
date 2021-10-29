@@ -28,85 +28,10 @@ inputs:
 outputs:
   annotation-id:
     description: "The returned Grafana Annotation ID that can be used to set and end time to the annotation after an action has completed."
-    value: ${{ steps.annotate.outputs.result }}
 
 runs:
-  using: 'composite'
-  steps:
-    - shell: 'bash'
-      id: 'annotate'
-      env:
-        GRAFANA_DASHBOARD_ID: ${{ inputs.grafanaDashboardID }}
-        GRAFANA_PANEL_ID:  ${{ inputs.grafanaPanelID }}
-        GRAFANA_TEXT: ${{ inputs.grafanaText }}
-        GRAFANA_TAGS: ${{ inputs.grafanaTags }}
-        GRAFANA_ANNOTATION_ID: ${{ inputs.grafanaAnnotationID }}
-        GRAFANA_HOST: ${{ inputs.grafanaHost }}
-        GRAFANA_TOKEN: ${{ inputs.grafanaToken }}
-      run: |
-        now=$(date +%s000)
-
-        create_annotation() {
-          # POST /api/annotations
-          if [[ -z $GRAFANA_DASHBOARD_ID ]] && [[ -z $GRAFANA_PANEL_ID ]]; then
-            echo "Creating global annotation"
-
-            status=$(curl -s -o response.txt -w "%{http_code}" -X POST \
-            -d "{\"tags\": $GRAFANA_TAGS, \"text\": \"$GRAFANA_TEXT\" }" \
-            -H "Content-Type: application/json" -H "Authorization: Bearer $GRAFANA_TOKEN" \
-            "$GRAFANA_HOST/api/annotations" )
-
-            if [ "$status" != "200" ]; then
-              echo "There was a problem creating the annotation:"
-              cat response.txt
-              exit 1
-            fi
-
-          else
-            if [[ -z $GRAFANA_DASHBOARD_ID ]] || [[ -z $GRAFANA_PANEL_ID ]]; then
-              echo "Both grafanaDashboardID and grafanaPanelID must be set or empty. Cannot only set one of these."
-              exit 1
-            fi
-            echo "Creating annotation for dashboard [$GRAFANA_DASHBOARD_ID] & panel [$GRAFANA_PANEL_ID]"
-
-            status=$(curl -s -o response.txt -w "%{http_code}" -X POST \
-            -d "{\"tags\": $GRAFANA_TAGS, \"text\": \"$GRAFANA_TEXT\", \"dashboardId\": \"$GRAFANA_DASHBOARD_ID\", \"panelId\": \"$GRAFANA_PANEL_ID\"}" \
-            -H "Content-Type: application/json" -H "Authorization: Bearer $GRAFANA_TOKEN" \
-            "$GRAFANA_HOST/api/annotations" )
-            if [ "$status" != "200" ]; then
-              echo "There was a problem creating the annotation:"
-              cat response.txt
-              exit 1
-            fi
-          fi
-
-          id=$(jq .id < response.txt)
-          echo "Successfully created annotation with ID [$id]"
-          echo "::set-output name=result::$id"
-          exit 0
-        }
-        update_annotation_end_time() {
-          # PATCH /api/annotations/:id
-          echo "Updating the end time of annotation"
-          status=$(curl -s -o response.txt -w "%{http_code}" -X PATCH \
-          -d "{\"timeEnd\": $now}" \
-          -H "Content-Type: application/json" -H "Authorization: Bearer $GRAFANA_TOKEN" \
-          "$GRAFANA_HOST/api/annotations/$GRAFANA_ANNOTATION_ID" )
-          if [ "$status" != "200" ]; then
-            echo "There was a problem updating the annotation:"
-            cat response.txt
-            exit 1
-          fi
-
-          echo "Successfully updated annotation end time"
-          exit 0
-        }
-
-        if [[ -z $GRAFANA_ANNOTATION_ID ]]; then
-          create_annotation
-        else
-          update_annotation_end_time
-        fi
+  using: 'node12'
+  main: 'index.js'
 
 branding:
   icon: 'anchor'

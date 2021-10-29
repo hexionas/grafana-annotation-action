@@ -1,0 +1,26 @@
+{
+  "name": "grafana-annotation-action",
+  "version": "1.0.0",
+  "description": "GitHub Action for Grafana annotations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danieloneilldazn/grafana-annotation-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danieloneilldazn/grafana-annotation-action/issues"
+  },
+  "homepage": "https://github.com/danieloneilldazn/grafana-annotation-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "axios": "^0.24.0",
+    "moment": "^2.29.1"
+  }
+}
