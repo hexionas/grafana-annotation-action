@@ -35,7 +35,7 @@ try {
             payload.panelId = grafanaPanelID;
         }
 
-        console.log("payload: " + payload)
+        console.log("payload: " + JSON.stringify(payload));
 
         axios.post(
             `${grafanaHost}/api/annotations`,
