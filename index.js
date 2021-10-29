@@ -35,22 +35,22 @@ try {
             payload.panelId = grafanaPanelID;
         }
 
-        const response = await axios.post(
+        axios.post(
             `${grafanaHost}/api/annotations`,
             payload,
             {
                 headers: headers
             }
-        );
+            ).then((response) => {
+                if (response.status !== 200) {
+                    console.warn("non 200 status code from post /api/annotations: " + response.status)
+                    core.setFailed("post request had failed");
+                }
 
-        if (response.status !== 200) {
-            console.warn("non 200 status code from post /api/annotations: " + response.status)
-            core.setFailed("post request had failed");
-        }
-
-        const annotationId = response.data.id;
-        console.log(`successfully created an annotation with the following id [${annotationId}]`)
-        core.setOutput("annotation-id", annotationId);
+                const annotationId = response.data.id;
+                console.log(`successfully created an annotation with the following id [${annotationId}]`)
+                core.setOutput("annotation-id", annotationId);
+        });
 
     } else {
         console.log("preparing to update an existing annotation")
@@ -59,19 +59,19 @@ try {
         };
 
         console.log(`updating the 'time-end' of annotation [${grafanaAnnotationID}]`);
-        const response = await axios.patch(
+        axios.patch(
             `${grafanaHost}/api/annotations/${grafanaAnnotationID}`,
             payload,
             {
                 headers: headers
             }
-        );
-
-        if (response.status !== 200) {
-            console.warn("non 200 status code from patch /api/annotations: " + response.status)
-            core.setFailed("patch request had failed");
-        }
-        console.log("successfully updated the annotation with time-end");
+        ).then((response) => {
+            if (response.status !== 200) {
+                console.warn("non 200 status code from patch /api/annotations: " + response.status)
+                core.setFailed("patch request had failed");
+            }
+            console.log("successfully updated the annotation with time-end");
+        });
     }
 } catch (error) {
     core.setFailed(error.message);
