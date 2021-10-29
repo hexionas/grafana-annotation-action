@@ -6,21 +6,21 @@ try {
     let globalAnnotation = true;
     const grafanaHost = core.getInput("grafanaHost", {required: true});
     const grafanaToken = core.getInput("grafanaToken", {required: true});
-    const grafanaTags = core.getInput("grafanaTags");
-    const grafanaDashboardID = core.getInput("grafanaDashboardID");
-    const grafanaPanelID = core.getInput("grafanaPanelID");
+    const grafanaTags = core.getInput("grafanaTags").split("\n").filter(x => x !== "");
+    const grafanaDashboardID = Number.parseInt(core.getInput("grafanaDashboardID"), 10) || undefined;
+    const grafanaPanelID = Number.parseInt(core.getInput("grafanaPanelID"),10) || undefined;
     const grafanaText = core.getInput("grafanaText");
-    const grafanaAnnotationID = core.getInput("grafanaDashboardID");
+    const grafanaAnnotationID = Number.parseInt(core.getInput("grafanaDashboardID"), 10) || undefined;
 
     let headers = {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${grafanaToken}`
     };
 
-    if (grafanaAnnotationID === "") {
+    if (grafanaAnnotationID === undefined) {
         console.log("preparing to create a new annotation")
 
-        if (grafanaDashboardID !== "" && grafanaPanelID !== "") {
+        if (grafanaDashboardID !== undefined && grafanaPanelID !== undefined) {
             console.log("Dashboard and panel specified, non global annotation will be created.")
             globalAnnotation = false
         }
@@ -35,25 +35,22 @@ try {
             payload.panelId = grafanaPanelID;
         }
 
-        axios.post(
+        const response = await axios.post(
             `${grafanaHost}/api/annotations`,
             payload,
             {
                 headers: headers
-            },
-        ).then(response => {
-            if (response.status !== 200) {
-                console.warn("non 200 status code from post /api/annotations: " + response.status)
-                throw new Error(response.statusText)
             }
+        );
 
-            const annotationId = response.data.id;
-            console.log(`successfully created an annotation with the following id [${annotationId}]`)
+        if (response.status !== 200) {
+            console.warn("non 200 status code from post /api/annotations: " + response.status)
+            core.setFailed("post request had failed");
+        }
 
-            core.setOutput("annotation-id", annotationId);
-        }, (error) => {
-            throw error;
-        });
+        const annotationId = response.data.id;
+        console.log(`successfully created an annotation with the following id [${annotationId}]`)
+        core.setOutput("annotation-id", annotationId);
 
     } else {
         console.log("preparing to update an existing annotation")
@@ -62,21 +59,19 @@ try {
         };
 
         console.log(`updating the 'time-end' of annotation [${grafanaAnnotationID}]`);
-        axios.patch(
+        const response = await axios.patch(
             `${grafanaHost}/api/annotations/${grafanaAnnotationID}`,
             payload,
             {
                 headers: headers
-            },
-        ).then((response) => {
-            if (response.status !== 200) {
-                console.warn("non 200 status code from patch /api/annotations: " + response.status)
-                throw new Error(response.statusText)
             }
-            console.log("successfully updated the annotation with time-end");
-        }, (error) => {
-            throw error;
-        });
+        );
+
+        if (response.status !== 200) {
+            console.warn("non 200 status code from patch /api/annotations: " + response.status)
+            core.setFailed("patch request had failed");
+        }
+        console.log("successfully updated the annotation with time-end");
     }
 } catch (error) {
     core.setFailed(error.message);

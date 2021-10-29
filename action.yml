@@ -19,7 +19,7 @@ inputs:
     description: 'Id. of the panel to add the annotation on. If not provided, will be global to all panels.'
     required: false
   grafanaTags:
-    description: 'JSON valid array of tags. EG: ["tag1", "tag2"]'
+    description: 'Newline separated list of grafana tags.'
     required: false
   grafanaAnnotationID:
     description: 'Use this only to update the end time of a previously created annotation.'
