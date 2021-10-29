@@ -22,7 +22,7 @@ try {
 
         if (grafanaDashboardID !== "" && grafanaPanelID !== "") {
             console.log("Dashboard and panel specified, non global annotation will be created.")
-            let globalAnnotation = false
+            globalAnnotation = false
         }
 
         let payload = {
@@ -51,7 +51,7 @@ try {
             console.log(`successfully created an annotation with the following id [${annotationId}]`)
 
             core.setOutput("annotation-id", annotationId);
-        }).catch((error)=>{
+        }, (error) => {
             throw error;
         });
 
@@ -74,9 +74,9 @@ try {
                 throw new Error(response.statusText)
             }
             console.log("successfully updated the annotation with time-end");
-        }).catch((error) => {
+        }, (error) => {
             throw error;
-        })
+        });
     }
 } catch (error) {
     core.setFailed(error.message);
