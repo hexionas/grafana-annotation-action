@@ -35,23 +35,26 @@ try {
             payload.panelId = grafanaPanelID;
         }
 
-        const response = await axios.post(
+        axios.post(
             `${grafanaHost}/api/annotations`,
             payload,
             {
                 headers: headers
             },
-        )
+        ).then(response => {
+            if (response.status !== 200) {
+                console.warn("non 200 status code from post /api/annotations: " + response.status)
+                throw new Error(response.statusText)
+            }
 
-        if (response.status !== 200) {
-            console.warn("non 200 status code from post /api/annotations: " + response.status)
-            throw new Error(response.statusText)
-        }
+            const annotationId = response.data.id;
+            console.log(`successfully created an annotation with the following id [${annotationId}]`)
 
-        const annotationId = response.data.id;
-        console.log(`successfully created an annotation with the following id [${annotationId}]`)
+            core.setOutput("annotation-id", annotationId);
+        }).catch((error)=>{
+            throw error;
+        });
 
-        core.setOutput("annotation-id", annotationId);
     } else {
         console.log("preparing to update an existing annotation")
         let payload = {
@@ -59,15 +62,21 @@ try {
         };
 
         console.log(`updating the 'time-end' of annotation [${grafanaAnnotationID}]`);
-        const response = await axios.patch(
+        axios.patch(
             `${grafanaHost}/api/annotations/${grafanaAnnotationID}`,
             payload,
             {
                 headers: headers
             },
-        );
-
-        console.log("successfully updated the annotation with time-end");
+        ).then((response) => {
+            if (response.status !== 200) {
+                console.warn("non 200 status code from patch /api/annotations: " + response.status)
+                throw new Error(response.statusText)
+            }
+            console.log("successfully updated the annotation with time-end");
+        }).catch((error) => {
+            throw error;
+        })
     }
 } catch (error) {
     core.setFailed(error.message);
