@@ -10,7 +10,7 @@ try {
     const grafanaDashboardID = Number.parseInt(core.getInput("grafanaDashboardID"), 10) || undefined;
     const grafanaPanelID = Number.parseInt(core.getInput("grafanaPanelID"),10) || undefined;
     const grafanaText = core.getInput("grafanaText");
-    const grafanaAnnotationID = Number.parseInt(core.getInput("grafanaDashboardID"), 10) || undefined;
+    const grafanaAnnotationID = Number.parseInt(core.getInput("grafanaAnnotationID"), 10) || undefined;
 
     let headers = {
         "Content-Type": "application/json",
