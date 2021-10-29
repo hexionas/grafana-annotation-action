@@ -10,7 +10,7 @@ try {
     const grafanaDashboardID = Number.parseInt(core.getInput("grafanaDashboardID"), 10) || undefined;
     const grafanaPanelID = Number.parseInt(core.getInput("grafanaPanelID"),10) || undefined;
     const grafanaText = core.getInput("grafanaText");
-    const grafanaAnnotationID = Number.parseInt(core.getInput("grafanaAnnotationID"), 10) || undefined;
+    const grafanaAnnotationID = Number.parseInt(core.getInput("graaaa"), 10) || undefined;
 
     let headers = {
         "Content-Type": "application/json",
@@ -50,6 +50,9 @@ try {
                 const annotationId = response.data.id;
                 console.log(`successfully created an annotation with the following id [${annotationId}]`)
                 core.setOutput("annotation-id", annotationId);
+        }).catch((err) => {
+            console.error(err);
+            core.setFailed(err.message);
         });
 
     } else {
@@ -71,6 +74,9 @@ try {
                 core.setFailed("patch request had failed");
             }
             console.log("successfully updated the annotation with time-end");
+        }).catch((err) => {
+            console.error(err);
+            core.setFailed(err.message);
         });
     }
 } catch (error) {
