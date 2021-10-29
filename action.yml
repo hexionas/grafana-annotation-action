@@ -11,7 +11,7 @@ inputs:
     required: true
   grafanaText:
     description: 'Text that will appear on the annotation. Newlines unsupported.'
-    required: false
+    required: true
   grafanaDashboardID:
     description: 'Id. of the dashboard to add the annotation on. If not provided, will be global to all dashboards.'
     required: false
@@ -22,7 +22,7 @@ inputs:
     description: 'Newline separated list of grafana tags.'
     required: false
   grafanaAnnotationID:
-    description: 'Use this only to update the end time of a previously created annotation.'
+    description: 'Id of previously created annotation to update the "timeEnd" for current time.'
     required: false
 
 outputs:
