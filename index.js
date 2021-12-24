@@ -1,3 +1,5 @@
+import {error} from "@actions/core";
+
 const core = require('@actions/core');
 const axios = require('axios');
 const moment = require('moment');
@@ -19,7 +21,12 @@ export const run = () => {
         };
 
         if (grafanaAnnotationID === undefined) {
-            console.log("preparing to create a new annotation")
+            console.log("creating a new annotation")
+
+            if ((grafanaDashboardID === undefined && grafanaPanelID !== undefined) ||
+                (grafanaDashboardID !== undefined && grafanaPanelID === undefined)) {
+                return error('must supply both grafanaDashboardID, grafanaPanelID or none.')
+            }
 
             if (grafanaDashboardID !== undefined && grafanaPanelID !== undefined) {
                 console.log("Dashboard and panel specified, non global annotation will be created.")
@@ -59,7 +66,7 @@ export const run = () => {
             });
 
         } else {
-            console.log("preparing to update an existing annotation")
+            console.log("updating the end time of existing annotation");
             let payload = {
                 timeEnd: moment.now().valueOf()
             };

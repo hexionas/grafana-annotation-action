@@ -5,7 +5,7 @@
   "description": "GitHub Action for Grafana annotations.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "prepare": "husky install"
   },
   "repository": {
