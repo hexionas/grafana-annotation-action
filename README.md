@@ -1,4 +1,4 @@
-# grafana-annotation-action
+# grafana-annotation-action <a href="https://github.com/frankie567/grafana-annotation-action/actions"><img alt="status" src="https://github.com/danieloneilldazn/grafana-annotation-action/workflows/ci/badge.svg"></a>
 GitHub Action for Grafana annotations.
 
 ![Example Image](images/example.png)
@@ -38,7 +38,7 @@ jobs:
 * `grafanaHost` **Required**: The Grafana API host.
 * `grafanaToken` **Required**: The Grafana API authentication token.
 * `grafanaText` **Required**: The Grafana Annotation text.
-* `grafanaDashboardID` **Optional**: Used to target a specific dashboard panel alongside `grafanaPanelId`.
+* `grafanaDashboardID` **Optional**: Used to target a specific dashboard panel alongside `grafanaPanelID`.
 * `grafanaPanelID` **Optional**: Used to target a specific panel alongside `grafanaDashboardID`.
 * `grafanaTags` **Optional**: Newline separated tags that will be sent with annotation.
 * `grafanaAnnotationID` **Optional**: If supplied, an exiting annotation will be updated with the end-time as current time.

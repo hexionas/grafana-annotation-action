@@ -1,10 +1,12 @@
 {
   "name": "grafana-annotation-action",
+  "type": "module",
   "version": "1.0.0",
   "description": "GitHub Action for Grafana annotations.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --runInBand",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -22,5 +24,10 @@
     "@actions/github": "^5.0.0",
     "axios": "^0.24.0",
     "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.0",
+    "husky": "^7.0.4",
+    "jest": "^27.3.1"
   }
 }

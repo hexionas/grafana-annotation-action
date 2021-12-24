@@ -1,10 +1,38 @@
-import {error} from "@actions/core";
-
+/******/ // The require scope
+/******/ var __nccwpck_require__ = {};
+/******/ 
+/************************************************************************/
+/******/ /* webpack/runtime/define property getters */
+/******/ (() => {
+/******/ 	// define getter functions for harmony exports
+/******/ 	__nccwpck_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 			}
+/******/ 		}
+/******/ 	};
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/hasOwnProperty shorthand */
+/******/ (() => {
+/******/ 	__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/compat */
+/******/ 
+/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
+/******/ 
+/************************************************************************/
+var __webpack_exports__ = {};
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "K": () => (/* binding */ run)
+/* harmony export */ });
 const core = require('@actions/core');
 const axios = require('axios');
 const moment = require('moment');
 
-export const run = () => {
+const run = () => {
     try {
         let globalAnnotation = true;
         const grafanaHost = core.getInput("grafanaHost", {required: true});
@@ -21,12 +49,7 @@ export const run = () => {
         };
 
         if (grafanaAnnotationID === undefined) {
-            console.log("creating a new annotation")
-
-            if ((grafanaDashboardID === undefined && grafanaPanelID !== undefined) ||
-                (grafanaDashboardID !== undefined && grafanaPanelID === undefined)) {
-                return error('must supply both grafanaDashboardID, grafanaPanelID or none.')
-            }
+            console.log("preparing to create a new annotation")
 
             if (grafanaDashboardID !== undefined && grafanaPanelID !== undefined) {
                 console.log("Dashboard and panel specified, non global annotation will be created.")
@@ -66,7 +89,7 @@ export const run = () => {
             });
 
         } else {
-            console.log("updating the end time of existing annotation");
+            console.log("preparing to update an existing annotation")
             let payload = {
                 timeEnd: moment.now().valueOf()
             };
@@ -95,3 +118,5 @@ export const run = () => {
 };
 
 run();
+var __webpack_exports__run = __webpack_exports__.K;
+export { __webpack_exports__run as run };
