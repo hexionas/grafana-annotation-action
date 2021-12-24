@@ -1,4 +1,4 @@
-# grafana-annotation-action <a href="https://github.com/frankie567/grafana-annotation-action/actions"><img alt="status" src="https://github.com/danieloneilldazn/grafana-annotation-action/workflows/ci/badge.svg"></a>
+# grafana-annotation-action <a href="https://github.com/danieloneilldazn/grafana-annotation-action/actions"><img alt="status" src="https://github.com/danieloneilldazn/grafana-annotation-action/workflows/CI/badge.svg"></a>
 GitHub Action for Grafana annotations.
 
 ![Example Image](images/example.png)
