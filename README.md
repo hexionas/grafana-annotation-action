@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Add Grafana annotation
         id: grafana
-        uses: actions/grafana-annotation-action@v0
+        uses: danieloneilldazn/grafana-annotation-action@v0
         with:
           grafanaHost: "https://grafana.example.com"
           grafanaToken: ${{ secrets.GRAFANA_TOKEN }}
@@ -27,7 +27,7 @@ jobs:
       - name: Action that takes some time
         run: sleep 30
       - name: Update Grafana annotation
-        uses: actions/grafana-annotation-action@v0
+        uses: danieloneilldazn/grafana-annotation-action@v0
         with:
           grafanaHost: "https://grafana.example.com"
           grafanaToken: ${{ secrets.GRAFANA_TOKEN }}
