@@ -1,38 +1,44 @@
-name: "grafana-annotation-actions"
-author: "Daniel O'Neill"
-description: "Create Grafana annotations using Github Actions. Update the annotation end time after an Action is finished."
-
+name: grafana-annotation-actions
+author: Daniel O'Neill
+description: >-
+  Create Grafana annotations using Github Actions. Update the annotation end
+  time after an Action is finished.
 inputs:
   grafanaHost:
-    description: 'Grafana Hostname'
+    description: Grafana Hostname
     required: true
   grafanaToken:
-    description: 'Grafana API token'
+    description: Grafana API token
     required: true
   grafanaText:
-    description: 'Text that will appear on the annotation. Newlines unsupported.'
+    description: Text that will appear on the annotation. Newlines unsupported.
     required: true
   grafanaDashboardID:
-    description: 'Id. of the dashboard to add the annotation on. If not provided, will be global to all dashboards.'
+    description: >-
+      Id. of the dashboard to add the annotation on. If not provided, will be
+      global to all dashboards.
     required: false
   grafanaPanelID:
-    description: 'Id. of the panel to add the annotation on. If not provided, will be global to all panels.'
+    description: >-
+      Id. of the panel to add the annotation on. If not provided, will be global
+      to all panels.
     required: false
   grafanaTags:
-    description: 'Newline separated list of grafana tags.'
+    description: Newline separated list of grafana tags.
     required: false
   grafanaAnnotationID:
-    description: 'Id of previously created annotation to update the "timeEnd" for current time.'
+    description: >-
+      Id of previously created annotation to update the "timeEnd" for current
+      time.
     required: false
-
 outputs:
   annotation-id:
-    description: "The returned Grafana Annotation ID that can be used to set and end time to the annotation after an action has completed."
-
+    description: >-
+      The returned Grafana Annotation ID that can be used to set and end time to
+      the annotation after an action has completed.
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
-
+  using: node12
+  main: dist/index.js
 branding:
-  icon: 'anchor'
-  color: 'white'
+  icon: anchor
+  color: white

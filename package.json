@@ -1,12 +1,10 @@
 {
   "name": "grafana-annotation-action",
-  "type": "module",
-  "version": "1.0.0",
   "description": "GitHub Action for Grafana annotations.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest --runInBand",
-    "prepare": "husky install"
+    "build": "npx @vercel/ncc build && npx convert-action"
   },
   "repository": {
     "type": "git",
@@ -27,7 +25,6 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.0",
-    "husky": "^7.0.4",
     "jest": "^27.3.1"
   }
 }
