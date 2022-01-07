@@ -1,4 +1,4 @@
-# grafana-annotation-action <a href="https://github.com/danieloneilldazn/grafana-annotation-action/actions"><img alt="status" src="https://github.com/danieloneilldazn/grafana-annotation-action/workflows/CI/badge.svg"></a> [![Latest Stable Version](https://img.shields.io/github/v/release/danieloneilldazn/grafana-annotation-action)](https://github.com/danieloneilldazn/grafana-annotation-action/releases)
+# grafana-annotation-action <a href="https://github.com/danieloneilldazn/grafana-annotation-action/actions"><img alt="status" src="https://github.com/danieloneilldazn/grafana-annotation-action/workflows/CI/badge.svg"></a> [![Latest Stable Version](https://img.shields.io/github/v/release/danieloneilldazn/grafana-annotation-action?)](https://github.com/danieloneilldazn/grafana-annotation-action/releases)
 
 GitHub Action for Grafana annotations.
 
