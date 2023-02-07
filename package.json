@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/danieloneilldazn/grafana-annotation-action#readme",
   "dependencies": {
-    "@actions/core": "^1.9.1",
+    "@actions/core": "^1.10.0",
     "@actions/github": "^5.0.0",
     "axios": "^0.24.0",
     "moment": "^2.29.4"
