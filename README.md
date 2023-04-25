@@ -1,4 +1,4 @@
-# grafana-annotation-action <a href="https://github.com/danieloneilldazn/grafana-annotation-action/actions"><img alt="status" src="https://github.com/danieloneilldazn/grafana-annotation-action/workflows/CI/badge.svg"></a> [![Latest Stable Version](https://img.shields.io/github/v/release/danieloneilldazn/grafana-annotation-action?)](https://github.com/danieloneilldazn/grafana-annotation-action/releases)
+# grafana-annotation-action <a href="https://github.com/hexionas/grafana-annotation-action/actions"><img alt="status" src="https://github.com/hexionas/grafana-annotation-action/workflows/CI/badge.svg"></a> [![Latest Stable Version](https://img.shields.io/github/v/release/hexionas/grafana-annotation-action?)](https://github.com/hexionas/grafana-annotation-action/releases)
 
 GitHub Action for Grafana annotations.
 
@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Add Grafana annotation
         id: grafana
-        uses: danieloneilldazn/grafana-annotation-action@v0
+        uses: hexionas/grafana-annotation-action@v0
         with:
           grafanaHost: "https://grafana.example.com"
           grafanaToken: ${{ secrets.GRAFANA_TOKEN }}
@@ -27,7 +27,7 @@ jobs:
       - name: Action that takes some time
         run: sleep 30
       - name: Update Grafana annotation
-        uses: danieloneilldazn/grafana-annotation-action@v0
+        uses: hexionas/grafana-annotation-action@v0
         with:
           grafanaHost: "https://grafana.example.com"
           grafanaToken: ${{ secrets.GRAFANA_TOKEN }}
