@@ -12,8 +12,8 @@ export const run = () => {
         const grafanaTags = core.getInput("grafanaTags").split("\n").filter(x => x !== "");
         const grafanaDashboardID = Number.parseInt(core.getInput("grafanaDashboardID"), 10) || undefined;
         const grafanaPanelID = Number.parseInt(core.getInput("grafanaPanelID"),10) || undefined;
-        const grafanaText = core.getInput("grafanaText", {required: true});
         const grafanaAnnotationID = Number.parseInt(core.getInput("grafanaAnnotationID"), 10) || undefined;
+        const grafanaText = core.getInput("grafanaText", {required: (grafanaAnnotationID === undefined)});
 
         let headers = {
             "Content-Type": "application/json",
