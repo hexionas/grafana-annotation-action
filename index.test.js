@@ -104,6 +104,7 @@ describe('Grafana Annotation Action Tests', () => {
     // ****************************************************************************************
     test('Update Annotation: update', () => {
         process.env.INPUT_GRAFANAANNOTATIONID = "12345";
+        delete process.env.INPUT_GRAFANATEXT; // Make sure text is not present
         axios.patch.mockImplementation(() => Promise.resolve({ status: 200}));
         run();
         expect(axios.post).toBeCalledTimes(0);
