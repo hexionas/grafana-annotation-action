@@ -20,7 +20,7 @@
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.0.0",
-    "axios": "^0.24.0",
+    "axios": "^1.6.0",
     "moment": "^2.29.4"
   },
   "devDependencies": {
