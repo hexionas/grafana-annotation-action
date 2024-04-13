@@ -37,7 +37,7 @@ outputs:
       The returned Grafana Annotation ID that can be used to set and end time to
       the annotation after an action has completed.
 runs:
-  using: node16
+  using: node20
   main: dist/index.js
 branding:
   icon: anchor
